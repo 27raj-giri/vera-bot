@@ -51,6 +51,8 @@ async def call_groq(system_prompt: str, user_prompt: str) -> str:
     async with httpx.AsyncClient(timeout=25) as client:
         resp = await client.post(GROQ_URL, headers=headers, json=body)
         data = resp.json()
+        if "choices" not in data:
+            raise Exception(f"Groq error: {data.get('error', data)}")
         return data["choices"][0]["message"]["content"].strip()
 
 
