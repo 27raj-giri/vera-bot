@@ -2,7 +2,7 @@
 
 **Team:** Aayush Raj Giri  
 **Contact:** heyayush27@gmail.com  
-**Model:** Groq — Llama 3.3 70B Versatile
+**Model:** Groq - Llama 3.3 70B Versatile
 
 ## Approach
 
