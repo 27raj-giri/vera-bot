@@ -287,6 +287,7 @@ async def tick(request: Request):
 
             result = json.loads(raw)
         except Exception as e:
+            print(f"ERROR in tick: {e}")
             continue
 
         conversation_id = f"conv_{merchant_id}_{trigger_id}"
