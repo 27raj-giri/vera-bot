@@ -67,7 +67,7 @@ RULES:
 - One clear CTA only
 - No URLs in message body
 - Match the category tone (dentist = clinical peer, salon = warm visual, restaurant = timely utility, gym = motivational, pharmacy = clinical trustworthy)
-- Write in the merchant's language preference (Hindi/English mix if needed)
+- Write in English by default. Only use Hinglish if merchant languages list explicitly includes 'hi'. For south Indian merchants (te, kn, ta, mr) always use English.
 - Be specific about WHY NOW matters
 
 Return ONLY valid JSON in this exact format:
