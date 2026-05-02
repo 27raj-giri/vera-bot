@@ -69,6 +69,7 @@ RULES:
 - Match the category tone (dentist = clinical peer, salon = warm visual, restaurant = timely utility, gym = motivational, pharmacy = clinical trustworthy)
 - Write in English by default. Only use Hinglish if merchant languages list explicitly includes 'hi'. For south Indian merchants (te, kn, ta, mr) always use English.
 - Be specific about WHY NOW matters
+- For competitor_opened triggers: mention the competitor by name, their offer, and explain specifically why this merchant is still the better choice based on their actual strengths and reviews.
 
 Return ONLY valid JSON in this exact format:
 {
@@ -148,7 +149,9 @@ RULES:
 - If reply is an auto-reply (canned "Thank you for contacting..."), respond with action=wait on first occurrence, then end after repeated auto-replies
 - If merchant says stop/not interested/go away, respond with action=end
 - If merchant asks something out of scope, politely decline and redirect
-- If merchant is engaged, continue the conversation helpfully with one clear CTA
+- If merchant is engaged, respond SPECIFICALLY to what they said. If they want to book, give booking options. If they want audit help, give specific audit steps. If they confirm, take the next concrete action. NEVER give a generic response.
+- Read the conversation history carefully and respond to the exact intent expressed.
+- For customer replies: if customer wants to book a slot, confirm the specific slot they chose and give next steps.
 - No URLs in body
 - Keep response under 150 words
 
@@ -382,10 +385,8 @@ async def reply(request: Request):
         conv_history.append({"role": "merchant", "body": merchant_message})
         conversations[conversation_id] = conv_history
         return {
-            "action": "send",
-            "body": "Apologies — I won't message again. If anything changes, just reply 'Hi Vera' to restart. 🙏",
-            "cta": "none",
-            "rationale": "Merchant opted out explicitly; sending one graceful closing message then ending."
+            "action": "end",
+            "rationale": "Merchant explicitly opted out. Closing conversation permanently."
         }
 
     # normal reply — use Groq to respond
